@@ -9,6 +9,7 @@
     $: if(browser) {
         if(authenticated) {
             logout();
+            console.log("logout")
         }
         goto("/login");
     }

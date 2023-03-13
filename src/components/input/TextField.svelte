@@ -14,9 +14,9 @@
 
 	const handleChange = (event: Event) => {
 		const input = event.target as HTMLInputElement;
-		const newValue = input.value;
+		value = input.value;
 
-		errors = validator(newValue);
+		errors = validator(value);
 
 		valid = errors.length == 0;
 	};

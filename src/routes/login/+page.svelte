@@ -4,12 +4,16 @@
 	import GuestLayout from "../../layouts/GuestLayout.svelte";
 	import { validateEmail, validatePasswordPresence } from "../../utils/validators";
     import { isAuthenticated, login } from "../../utils/auth";
+	import { browser } from "$app/environment";
 
     let authenticated = false;
     isAuthenticated.subscribe(value => authenticated = value);
-    $: if(authenticated) {
-        console.log("Navigating to /");
-        goto("http://localhost:5173/");
+    $: if(browser) {
+        console.log(authenticated)
+        if(authenticated) {
+            console.log("login");
+            goto("/");
+        }    
     }
 
     let email : string = "";
@@ -25,6 +29,7 @@
     <h1>Welcome</h1>
     <form on:submit={(e) => {
         e.preventDefault();
+        console.log(email)
         login(email, password)
     }}>
         <TextField

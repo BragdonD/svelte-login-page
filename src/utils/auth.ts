@@ -2,18 +2,18 @@ import { persist, createLocalStorage, type PersistentStore } from '@macfja/svelt
 import { writable, type Writable } from 'svelte/store';
 
 interface User {
-    email: string
+  email: string
 }
 
 export const isAuthenticated: PersistentStore<boolean> = persist<boolean>(
   writable<boolean>(false),
-  createLocalStorage(), 
+  createLocalStorage(),
   "isAuthenticated"
 );
 
-export const user : PersistentStore<User> = persist<User>(
+export const user: PersistentStore<User> = persist<User>(
   writable<User>(undefined),
-  createLocalStorage(), 
+  createLocalStorage(),
   "user"
 );
 
@@ -22,7 +22,7 @@ export const user : PersistentStore<User> = persist<User>(
  * @param email 
  * @param password 
  */
-export function login(email : string, password : string) : null {
+export function login(email: string, password: string): null {
   // Call the login service on the backend and in function of
   // the result, set the user to the authenticated user
 
@@ -31,9 +31,13 @@ export function login(email : string, password : string) : null {
   return null;
 }
 
+const emptyUser: User = {
+  email: "",
+}
+
 export function logout() {
   // Perform logout logic
   // Once logged out, reset the isAuthenticated and user store values
-  isAuthenticated.delete();
-  user.delete();
+  isAuthenticated.set(false);
+  user.set(emptyUser);
 }
