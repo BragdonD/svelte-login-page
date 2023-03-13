@@ -14,3 +14,14 @@ export function validateEmail(email: string): string[] {
 
     return errors;
 }
+
+export function validatePasswordPresence(password: string): string[] {
+    const errors: string[] = [];
+
+    // Check for empty email
+    if (!password) {
+        errors.push('Password is required');
+    }
+
+    return errors;
+}
